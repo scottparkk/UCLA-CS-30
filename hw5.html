@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 5</title>
+</head>
+
+
+<body>
+
+<h1>Homework 5: Photo Editing</h1>
+
+<img width="50%" src="http://www.cs.ucla.edu/~todd/cs97/florence.jpg">
+<img width="50%" src="http://www.cs.ucla.edu/~todd/cs97/florenceNeg.jpg">
+<img width="50%" src="http://www.cs.ucla.edu/~todd/cs97/florenceGrey.jpg">
+<img width="50%" src="http://www.cs.ucla.edu/~todd/cs97/florenceUpsideDown.jpg">
+<img width="50%" src="http://www.cs.ucla.edu/~todd/cs97/florenceMirror.jpg">
+<img width="50%" src="http://www.cs.ucla.edu/~todd/cs97/florenceDecomp.jpg">
+
+<p>
+Original image of Sunset over Florence (the top-left image above)
+by http://www.flickr.com/people/sherseydc/ (http://flickr.com/photos/sherseydc/2954982676/) [CC-BY-SA-1.0 (http://creativecommons.org/licenses/by-sa/1.0) or CC-BY-2.0 (http://creativecommons.org/licenses/by/2.0)], via Wikimedia Commons
+
+<h2>Due Tuesday, November 23, at 11:30pm</h2>
+
+<h3>Turn in your homework via the CCLE web page for our course as an updated version of the <tt>hw5.py</tt> file that I have provided.   <b>Make sure to use exactly this file name; otherwise you will get a 0 on the homework!</b>
+
+<h3>Make sure that the file can be executed without any syntax or other errors into the Python playground in IDLE; otherwise you will get a 0 on the homework!</h3>
+
+<h3>Recall the CS30 Academic Honesty Policy!  You must list whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.  You can list that as a comment at the top of the <tt>hw5.py</tt> file.</h3>
+
+Our usual homework rules apply.  Do not use any functions from Python libraries.  Do not use any built-in functions of Python that have not been discussed in lecture, except when explicitly mentioned below.  Do not use any language features of Python that have not been discussed in lecture.
+
+<h3>What is an image?</h3>
+
+Just like we saw with strings on the last homework, computers don't know anything about images (e.g., photographs, drawings, etc.).  Rather, images are represented using an <i>encoding</i>.
+There are many different encodings, also called <i>formats</i>, for representing images in a computer.  We will use one standard and simple such format, called PPM.  In this format (as in most others), an image is represented simply as a rectangular grid of <i>pixels</i> (an abbreviation of <i>picture elements</i>), where each pixel has a single color.  That's it!
+
+<p>Ok, so then what is a pixel?  Well, computers don't know anything about colors either, but they do understand numbers. There are various formats for representing colors as numbers.
+The PPM format uses the <a href="https://en.wikipedia.org/wiki/RGB_color_model">RGB color model</a> to represent the color of each pixel.  In this model, a color is represented by a combination of red, green, and blue light.  Each color of light is given an intensity value between 0 and 255.  
+
+<p>In other words, a color is uniquely identified by just three small integers!  For example, the RGB triple (0, 0, 0) represents the color black (no light), (255, 255, 255) represents white (all light), (0, 255, 255) represents a shade of turquoise (a mix of green and blue), and by using values between 0 and 255 for the three colors of light you can produce all kinds of colors.  You can play with the RGB color model <a href="https://www.w3schools.com/colors/colors_rgb.asp">here</a>.
+
+<p>On some computers you can view a PPM image file simply by double-clicking on it.  If that doesn't work, on a Mac you can start the program called Preview and then open the file there; on Windows you may have to download and install the <a href="https://www.gimp.org/downloads">Gnu Image Manipulation Program</a> and then open the PPM files there.
+
+<p>The file <tt>example.ppm</tt> that I've provided is a very tiny image file, which is a grid of size 3x2 --- 3 rows and 2 columns.  If you view the image and zoom in a lot, you'll see these six pixels:
+
+<center>
+<p><img src="http://www.cs.ucla.edu/~todd/cs97/example.png">	
+</p></center>
+
+<h3>Representing Images in Python</h3>
+
+We will represent an image in Python as a list of rows, where each row is a list of pixels.  Each pixel in turn is represented as a dictionary with keys <tt>"r"</tt>, <tt>"g"</tt>, and <tt>"b"</tt>, whose corresponding values are integers between 0 and 255, inclusive.  For example, this is our representation of the image in <tt>example.ppm</tt>:
+
+<p><tt>[[{'r': 10, 'g': 23, 'b': 52}, {'r': 82, 'g': 3, 'b': 215}], [{'r': 30, 'g': 181, 'b': 101}, {'r': 33, 'g': 45, 'b': 205}], [{'r': 40, 'g': 68, 'b': 92}, {'r': 111, 'g': 76, 'b': 1}]]</tt></p>
+
+<p>You can see that the list contains three lists, corresponding to the three rows of the image.  Each row contains two <tt>pixel</tt> values, corresponding to the two pixels in that row.  For example, the pixel <tt>{'r': 82, 'g': 3, 'b': 215}</tt> represents the purplish pixel that is the second pixel in the first row of the image above.
+
+<p>
+<i>Each of the functions that you will write will take an image in the above format as an argument and return a new image in the above format as a result.</i>
+
+
+<h3>Transforming Real Images</h3>
+
+As usual, the functions that you will write perform the <i>computation</i> part of an application.  To transform real images, I've provided you with functions that perform the <i>input</i> and <i>output</i> parts of an application.
+Specifically, the function <tt>inputPPM</tt> converts a PPM file to the Python representation of an image described above, and the function <tt>outputPPM</tt> does the opposite.  
+
+<p>For example, here is how you can use these functions to transform our example image into its color negation, using the <tt>negate</tt> function that you will implement (see below):
+
+<p><tt>
+&gt;&gt;&gt; ex = inputPPM('example.ppm')<br>
+&gt;&gt;&gt; negEx = negate(ex)<br>
+&gt;&gt;&gt; outputPPM(negEx, 'exampleNeg.ppm')
+</tt>
+
+<p>The first line above inputs the file <tt>example.ppm</tt> and produces its Python representation, which we store in the variable <tt>ex</tt>.  Then we use the <tt>negate</tt> function to produce a new image in the Python representation, which we store in the variable <tt>negEx</tt>.  Finally, we use the <tt>outputPPM</tt> function to convert <tt>negEx</tt> into a PPM file named <tt>exampleNeg.ppm</tt>.  That file will be created on your computer, and you can view it to see the results of your image transformation.
+
+<p><i>Note: You are not responsible for understanding how <tt>inputPPM</tt> and <tt>outputPPM</tt> work.  They use some language features that we haven't seen in this class.</i>
+
+<p><i>Note: Your functions should never call <tt>inputPPM</tt> or <tt>outputPPM</tt>.  As mentioned above, each of the functions that you will write will simply take an image in the Python representation (as a list of list of pixels) and return a new image in that same representation.</i>
+
+
+<h3>The Assignment</h3>
+
+The file <tt>hw5.py</tt> contains definitions of six Python functions that you must implement.  Each of these functions takes an image represented as a list of lists of pixels and returns another image represented in the same way.  <i>Python's <tt>map</tt> function is a natural way to traverse the input image and produce an appropriate output image.</i>  
+
+<p>
+<b>Important note on testing:</b>  Simply viewing the images that result from your functions is not a sufficient way to test!  Rather, you should test your functions in the same way that you have (hopefully) tested prior homework functions:  by using <tt>assert</tt> to run them on a set of inputs and check that the outputs match what you expect.  In this homework, that means you should create small lists representing images, call your functions on them, and check that the resulting lists are correct.  I've provided a <tt>hw5test.py</tt> file for this purpose, as usual.
+
+<P>Now on to the assignment!
+
+<ol>
+<li>Implement the function <tt>negate</tt>, which takes a list representing an image and returns a new list representing the <i>color negative</i> of that image (see the second Florence image above).  To create the color negative of an image, simply replace each color intensity value <tt>v</tt> with <tt>255-v</tt>.  <i>Hint: A <tt>map</tt> within a <tt>map</tt> will allow you to walk over all pixels; see the <tt>innerMultiply</tt> problem from the Week 6 Discussion Section Worksheet for an example of this style.</i><p></p></li>
+
+<li>Implement the function <tt>greyscale</tt>, which takes a list representing  an image and returns a new list representing its greyscale version (see the third Florence image above).  To do so, the three component numbers in each pixel should be averaged to produce a single real number <tt>A</tt>.  You should convert that average to the nearest integer via the expression <tt>int(round(A))</tt>, which uses Python's <tt>round</tt> function to round <tt>A</tt> to the nearest integer and then the <tt>int</tt> function to convert that value (which will be of the form <tt>N.0</tt>) to an integer.  Finally, that integer should be used as the value for <i>each</i> of the three color intensities of the pixel.
+
+<p>For example, calling <tt>greyscale</tt> on the list shown earlier that represents the image <tt>example.ppm</tt> should return <tt>[[{'r': 28, 'g': 28, 'b': 28}, {'r': 100, 'g': 100, 'b': 100}], [{'r': 104, 'g': 104, 'b': 104}, {'r': 94, 'g': 94, 'b': 94}], [{'r': 67, 'g': 67, 'b': 67}, {'r': 63, 'g': 63, 'b': 63}]]</tt>.</p><p></p></li>
+</ol>
+
+<p><b>A brief interlude:</b>  We've seen that Python's <i>slicing</i> operator for lists has two (optional) arguments, a lower and upper bound.  For example, <tt>mylist[3:10]</tt> returns the substring of the list <tt>mylist</tt> between index 3 (inclusive) and 10 (exclusive).  It turns out that the slicing operator also has an optional third argument, which defaults to 1 and represents the "step size" between elements.  For example, <tt>mylist[3:10:2]</tt> returns the substring of <tt>mylist</tt> consisting of only the elements <tt>mylist[3]</tt>, <tt>mylist[5]</tt>, <tt>mylist[7]</tt>, and <tt>mylist[9]</tt>.
+
+<p>This extended version of slicing will be useful in many of the remaining problems.  In particular, <tt>mylist[::2]</tt> can be used to produce a version of <tt>mylist</tt> where every other element is skipped.  Even weirder (or cooler, depending on your perspective), the step size can be negative, which causes the list to be traversed backward, so <tt>mylist[::-1]</tt> produces the reverse of <tt>mylist</tt>.
+
+<p>Now back to the homework assignment...
+
+
+<ol start=3>
+<li>Implement the function <tt>upsideDown</tt>, which takes a list representing an image and returns a new list representing an upside-down version of that image (see the fourth Florence image above).  Specifically, the image should be flipped on its horizontal axis (the bottom is on the top and the top is on the bottom).   <i>Hint: List reversal via slicing (see above) will be useful.</i><p></p></li>
+
+<li>Implement the function <tt>mirrorImage</tt>, which takes a list representing an image and returns a new list representing the corresponding mirror image (see the fifth Florence image above).  Specifically, the image should be flipped on its vertical axis.  <i>Hint:  List reversal via slicing (see above) will be useful.</i></li><p></p>
+
+<li>Because images with many pixels take up a lot of computer memory, many image formats (for example, JPEG) use a form of <i>compression</i>.  The idea is to convert an image into a format that takes up less space, but possibly involves some loss of fidelity versus the original image.  This smaller version is quicker for people to download and takes up less space on their computers.  Then to display the image it must first be <i>decompressed</i> back to the original format.<p>
+
+ <ol type='a'>
+ <li>Implement the function <tt>compress</tt>, which performs a very simple kind of image compression.  The function takes a list representing an image and returns a new list representing a version of the image scaled to half of each of its original dimensions (and so containing roughly a quarter of the original pixels).  To do this, eliminate every other pixel in each row (hence scaling the image horizontally) and also eliminate every other row in the image (hence scaling the image vertically).  <i>Hint: See the slicing example above.</i>
+
+ <p>For example, calling <tt>compress</tt> on the list shown earlier that represents the image <tt>example.ppm</tt> should return <tt>[[{'r': 10, 'g': 23, 'b': 52}], [{'r': 40, 'g': 68, 'b': 92}]]</tt>.  The original image has three rows and two columns; the compressed version retains only the first and third rows, and within each row it retains only the first pixel.</p>
+
+ <p>Though in general compressed images cannot be directly viewed, in this case your compressed image is itself a PPM image and so can be viewed.  If you do so, you'll see that (as you might expect) you now have a smaller version of your original image.  So in fact, you've also implemented a  form of image <i>resizing</i>, similar to what happens when you use a mouse to resize an image on your computer.<p></p></li>
+
+<li>Now implement the function <tt>decompress</tt>, which is the inverse of <tt>compress</tt>.  That is, given a list representing an image, this function returns a new list representing a version of the image that is scaled to double its original dimensions (and so containing 4 times as any pixels).  To do so, each pixel within a row should be duplicated (hence scaling the image horizontally) and each row in the image should also be duplicated (hence scaling the image vertically).  
+
+<p>By "duplicated" we mean that each row of pixels <tt>[p1, p2, ..., pn]</tt> should be replaced by the row <tt>[p1, p1, p2, p2, ..., pn, pn]</tt>, and similarly the list of rows in the image, <tt>[r1, r2, ..., rm]</tt> should be replaced by list <tt>[r1, r1, r2, r2, ..., rm, rm]</tt>.  <i>Hint: We saw in class how to do this kind of element duplication using <tt>reduce</tt>.  That approach is recommended, but if you prefer you can instead create a recursive function to perform that task.</i>
+
+<p>If you take an image like our original one of Florence, compress it, decompress it, and then view it, you'll see clearly that this form of compression has a big effect on image quality (see the last Florence image above).
+
+</p></li></ol></li>
+
+</ol>
+
+</body></html>

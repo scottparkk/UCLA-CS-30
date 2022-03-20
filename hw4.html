@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 4</title>
+</head>
+
+
+<body>
+
+<h1>Homework 4</h1>
+
+<h2>Due Thursday, November 4, at 11:30pm</h2>
+
+<h3>Turn in your homework via the CCLE web page for our course as an updated version of the <tt>hw4.py</tt> file that I have provided.   <b>Make sure to use exactly this file name!</b>
+
+<h3>Make sure that the file can be executed without any syntax or other errors into the Python interpreter; otherwise you will get a 0 on the homework!</h3>
+
+<h3>Recall the CS30 Academic Honesty Policy!  You must list whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.  You can list that as a comment at the top of the <tt>hw4.py</tt> file.</h3>
+
+This assignment will give you practice using and writing functions that take other functions as arguments.  <b>Here are the rules you must follow:</b>
+
+<ol>
+	<li>
+		 <b><i>None of your functions (including any helper functions you write) can use recursion (or loops).</i></b>  Instead, they should make calls to one or more of <tt>map</tt>, <tt>filter</tt>, and <tt>reduce</tt> to perform the necessary list transformations.<p></p></li>
+
+	<li>Do not use any function from Python libraries other than <tt>reduce</tt>.  Do not use any built-in functions of Python that have not been discussed in lecture, except when explicitly mentioned below.  Do not use any language features of Python that have not been discussed in lecture.  If in doubt, ask!<p></p></li>
+
+	<li>Use the test functions to test your code on several input lists, including special cases --
+we will be doing the same.  As usual, do this by writing more tests using <tt>assert</tt>.<p></li>
+</ol>
+
+<h3>Problem 1: Warmup</h3>
+
+<ol type="a">
+
+
+<li>Computers don't know anything about triangles, but we can represent triangles with numbers, which is something that computers do know about.  Suppose that we represent a triangle by a list of three positive integers, representing the three side lengths, which you can assume will always be in order from least to greatest.  For example, <tt>[5, 8, 11]</tt> represents a triangle whose side lengths are respectively 5, 8, and 11.  Implement a function <tt>rightTriangles</tt> that takes a list of triangles in the above representation and returns a list containing all, and only, the <i>right</i> triangles.  <i>Recall that a right triangle is one whose sides form a <a href="https://en.wikipedia.org/wiki/Pythagorean_triple">Pythagorean triple</a>.</i>  For example, <tt>rightTriangles([[2, 3, 4], [3, 4, 5], [5, 12, 13], [8, 10, 12]])</tt> returns
+<tt>[[3, 4, 5], [5, 12, 13]]</tt>.<p></p></li>
+
+
+<li>In Homework 2 you implemented a function <tt>threshold</tt> that takes a list <tt>l</tt> of numbers and a number <tt>n</tt> and returns a new list that is identical to <tt>l</tt> but with all numbers that are less than <tt>n</tt> replaced by <tt>n</tt>.  For example, <tt>threshold([1, -4, 0, 4, 8], 1)</tt> returns <tt>[1, 1, 1, 4, 8]</tt>.  Re-implement <tt>threshold</tt> but now using one or more of <tt>map</tt>, <tt>filter</tt>, and <tt>reduce</tt> instead of recursion.<p></li>
+
+<li> Implement a function <tt>countOccurrences</tt> that takes a function <tt>f</tt> and a list <tt>l</tt>.  The function <tt>f</tt> should return a boolean value, and <tt>countOccurrences</tt> should return the number of elements <tt>x</tt> of the list <tt>l</tt> for which <tt>f(x)</tt> is <tt>True</tt>.  For example, <tt>countOccurrences(lambda x: x > 0, [1, -4, 0, 4, 8, 0])</tt> returns <tt>3</tt> since the given list contains 3 positive numbers.<p></p></li>
+
+
+</ol>
+
+<h3>Problem 2: Text Manipulation</h3>
+
+Computers don't know anything about characters or strings.  Then how is Python able to support them?  Through an <i>encoding</i>, in which each character is represented by a particular number.  For example, internally the character <tt>'a'</tt> is represented by the number 97.  Python's <tt>ord</tt> function returns the encoding of a given character.  For example, <tt>ord('a')</tt> returns <tt>97</tt>.  Python's <tt>chr</tt> function does this inverse:  <tt>chr(97)</tt> returns <tt>'a'</tt>.
+
+<p>The encodings of the lowercase letters between <tt>'a'</tt> and <tt>'z'</tt> are the 26 numbers between 97 and 122, inclusive.  For example, the encoding of the letter <tt>'e'</tt> is 101.  The encodings of the uppercase letters between <tt>'A'</tt> and <tt>'Z'</tt> are the 26 numbers between 65 and 90, inclusive.
+
+<p>Below you'll implement several functions that manipulate strings.  Each function is allowed to, and encouraged to, make use of the functions defined earlier.
+
+<ol type="a">
+<li> Implement a function <tt>toUpper</tt> that takes a single character as an argument and returns its uppercase version.  If the character is already uppercase then simply return it.  For example, <tt>toUpper('b')</tt> returns <tt>'B'</tt> and so does <tt>toUpper('B')</tt>.  You may assume that the given character is one of the 26 lowercase or 26 uppercase letters.  <i>Hint: No mapping, filtering, or reducing required for this problem!  The <tt>ord</tt> and <tt>chr</tt> functions will be useful.</i><p></p></li>
+
+<li>Now similarly implement a function <tt>toLower</tt> that takes a single character as an argument and returns its lowercase version.  If the character is already lowercase then simply return it.  For example, <tt>toLower('b')</tt> returns <tt>'b'</tt> and so does <tt>toLower('B')</tt>.  You may assume that the given character is one of the 26 lowercase or 26 uppercase letters.<p></li>
+
+<li>Implement a function <tt>allLower</tt> that takes a string and returns a version of the string where all letters are in lowercase.  For example, <tt>allLower('hElLO')</tt> returns <tt>'hello'</tt> and <tt>allLower('')</tt> returns <tt>''</tt>.  You may assume that the given string contains only characters representing English letters.
+<i>Note: Because a string is a kind of sequence, you can use functions like <tt>map</tt> and <tt>filter</tt> to traverse a string one character at a time, which will be useful here.  However, those functions will return lists of characters, not strings, so you'll also need to use <tt>map</tt>, <tt>filter</tt>, and/or <tt>reduce</tt> to turn a list of characters back into a string.</i><p></li>
+
+<li>Implement a function <tt>capitalize</tt>, which takes a string and returns a version of the string where the first letter is capitalized and the rest are in lowercase.  For example, <tt>capitalize('hElLO')</tt> returns <tt>'Hello'</tt>.  You may assume that the given string contains only characters representing English letters. <p></p></li>
+
+<li>Finally, implement a function <tt>title</tt>, which takes a list of strings and capitalizes them appropriately as a book or movie title.  Specifically, the first word should always be capitalized, any word whose length is at least 4 should also be capitalized, and the other words should be in lowercase.  For example, <tt>title(['tHe', 'souND', 'AND', 'the', 'fUrY'])</tt> returns <tt>['The', 'Sound', 'and', 'the', 'Fury']</tt>. You may assume that each string in the list contains only characters representing English letters.  
+
+</ol>
+</body></html>

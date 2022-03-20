@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 3</title>
+</head>
+
+
+<body>
+
+<h1>Homework 3</h1>
+
+<h2>Due Thursday, October 28, at 11:30pm</h2>
+
+<h3>Turn in your homework via the CCLE web page for our course as an updated version of the <tt>hw3.py</tt> file that I have provided.   <b>Make sure to use exactly this file name!</b>
+
+<h3>Make sure that the file that you turn in can be loaded without any syntax or other errors in the Python playground via IDLE; otherwise you will get a 0 on the homework!</h3>
+
+<h3>Recall the CS30 Academic Honesty Policy!  You must list whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.  You can list that as a comment at the top of the <tt>hw3.py</tt> file.</h3>
+
+
+In this assignment you'll get practice implementing interesting algorithms using recursion in Python.  
+
+<p><b><i>IMPORTANT RULES!</i> 
+<ul>
+	<li>Make sure to use the exact same name for each function as listed below, and the exact same arguments, in the same order.  Otherwise you'll get no credit for that problem.</li>
+	<li>Each problem should be solved by writing a single, recursive function; <b>no helper functions are necessary or allowed</b>!</li>
+	<li>
+Do not use any Python libraries. 
+</li>
+<li> Do not use any built-in functions of Python that have not been discussed in lecture.  </li>
+<li>Do not use any language features of Python that have not been discussed in lecture. </li> 
+<li>If in doubt about any of these rules, ask!</li></ul></b>
+
+
+<p>
+Now on to the assignment!
+
+<p>I've provided a <tt>hw3.py</tt> file for you but it's empty!  You should add your functions there and submit that file.  I have also provided a <tt>hw3test.py</tt> file with functions that contain tests for the functions that you have to write.  You should add more tests to cover various interesting cases --- we will be doing the same when we grade these assignments.</p>
+
+<p>We are living in the era of "big data."  It's easier than ever for individuals, corporations, scientists, and governments to collect large amounts of data about themselves, society, and our world.  But how do we make sense of all that data, and turn it into useful <i>information</i>?  There are many different kinds of <i>data analyses</i>, and new approaches are being developed all the time.
+
+<h3> Problem #1: Counting Data</h3>
+
+One common data analysis task is <i>counting</i>, which is the task of computing the number of distinct items in a data set.  For example, a text analysis may need to determine the number of distinct words in a given book, and an analysis of the World Wide Web's structure may need to determine the number of distinct links to other pages on a given web page.  In this problem you will implement a function to count the number of distinct element in a list.
+
+<ol type="a">
+
+<li>First implement a function <tt>remove</tt> that takes an integer <tt>n</tt> and an integer list <tt>l</tt>.  The function should produce a new list that represents the result of removing all occurrences of <tt>n</tt> in <tt>l</tt>.  For example, <tt>remove(4, [-2, 3, 4, 0, 4, 1])</tt> returns <tt>[-2, 3, 0, 1]</tt>.<p></li>
+
+<li>Now implement a function <tt>countDistinct</tt> that accepts an integer list <tt>l</tt> and returns the number of distinct integers in the list. For example, <tt>countDistinct([1,5,3,2,2,1,3,2])</tt> returns <tt>4</tt>.  There is a natural recursive formulation of this problem that uses the <tt>remove</tt> function you wrote above.  In particular, the number of distinct elements in a non-empty list <tt>l</tt> is one more than the number of distinct elements in a version of <tt>l</tt> where all occurrences of its head are removed.  For example, <tt>countDistinct([1,5,3,2,2,1,3,2])</tt> is equal to <tt>1 + countDistinct([5,3,2,2,3,2])</tt>.<p></p></li>
+
+</ol>
+
+<h3>Problem #2:  Sorting Data</h3>
+
+<p>
+Another very common data analysis tasks is <i>sorting</i>, which is the task of ordering the data according to some criterion.  For example, Instagram may want to order the posts that you are shown from most to least recent or from most to least popular, and an evolutionary biologist may want to order the observed mutations in a large sample of human DNA from most to least prevalent.  In this problem you will implement several functions related to sorting.
+
+<ol type="a">
+
+<li>Implement a function <tt>isSorted</tt> that takes an integer list <tt>l</tt> and returns a boolean indicating whether the list is in sorted order from least to greatest.  Note that duplicate elements are allowed.  For example, <tt>isSorted([1, 2, 2, 8, 11])</tt> returns <tt>True</tt> and 
+	<tt>isSorted([1, 2, 2, 1, 11])</tt> returns <tt>False</tt>.<p></p></li>
+
+<li>Once you have a sorted list, you typically want to maintain the sorted order even as the list is updated.  Implement a function <tt>insert</tt> that takes an integer <tt>n</tt> and an integer list <tt>l</tt>, where the elements of <tt>l</tt> can be assumed to be in sorted order from least to greatest.  The function should produce a new list that represents the result of inserting <tt>n</tt> into <tt>l</tt> while maintaining sorted order. Note that duplicate elements are allowed.  For example, <tt>insert(4, [2,3,3,5])</tt> returns <tt>[2,3,3,4,5]</tt> and <tt>insert(2, [2,3,3,5])</tt> returns <tt>[2,2,3,3,5]</tt>. <i>Hint: Use our regular list recipe for recursion!  In the recursive case, consider two different scenarios, one where <tt>n</tt> is less than or equal to the head of the list, and the other where <tt>n</tt> is greater than the head of the list.</i><p></li>
+
+
+<li>Write a function <tt>merge</tt> that takes two integer lists <tt>l1</tt> and <tt>l2</tt> as arguments, which you can assume are each in sorted order from least to greatest.  The function should produce a new list that contains the elements of both input lists, also sorted from least to greatest.  Note that duplicates are allowed, both within and across lists.  For example, <tt>merge([1,3,5], [2,2,3,4])</tt> returns <tt>[1,2,2,3,3,4,5]</tt>. <b>Your solution should not call any functions other than <tt>merge</tt> itself.</b>  It is tempting to use the <tt>insert</tt> function above to implement <tt>merge</tt>, but that is not allowed (and will result in a much less efficient solution).  Instead, there is a natural recursive approach that you should employ.  In our example above, for instance, <tt>merge([1,3,5], [2,2,3,4])</tt> is equal to <tt>[1] + merge([3,5], [2,2,3,4])</tt>.<p></li>
+
+<li> Finally implement a function that can sort an arbitrary integer list.  Specifically, your function <tt>mergeSort</tt> takes an integer list and returns a list containing the same elements but sorted from least to greatest.  For example, <tt>mergeSort([1,5,3,2,2,1,3,2])</tt> returns <tt>[1,1,2,2,2,3,3,5]</tt>.
+There are many different algorithms for sorting.  Your function should implement what's called a <a>merge sort</a>, which will make use of the
+<tt>merge</tt> function that you defined above.  The merge sort algorithm conceptually works as follows.  First, use slicing to split the list into two equal (or in the case of an odd number of elements, close to equal) size lists --- in our example this produces <tt>[1,5,3,2]</tt> and <tt>[2,1,3,2]</tt>. Then sort each of these lists by calling <tt>mergeSort</tt> recursively --- in our example this produces <tt>[1,2,3,5]</tt> and <tt>[1,2,2,3]</tt>.  Finally use your <tt>merge</tt> function from above to merge the resulting lists to obtain the full sorted list.
+You can see an animation of merge sort in action on the right-hand side of the page <a href="https://en.wikipedia.org/wiki/Merge_sort">here</a>.<p></p></p></li>
+
+</ol>
+
+</body></html>

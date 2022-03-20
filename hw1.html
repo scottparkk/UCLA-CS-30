@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 1</title>
+</head>
+
+
+<body>
+
+<h1>Homework 1: Python and Picobot</h1>
+
+<h2>Due Thursday, October 7, at 11:30pm</h2>
+
+<h3>Turn in your homework via the CCLE web page for our course as three files:  an updated version of the file <tt>hw1.py</tt> that I have provided, and two files named 
+<tt>pico1.txt</tt> and <tt>pico2.txt</tt>.</h3>
+
+<p><i>There is a lot of information here; please read carefully!</i>
+
+<p>We will be grading your assignment in part automatically, with programs that run your functions on many different inputs and check the results.  Computers are efficient but they are also very <i>picky</i>.  <b>Make sure to follow all of these rules, or else your homework will not be able to be fully graded and you will get a 0 for all or part of it</b>:
+
+<ul>
+
+<li>Use <i>exactly</i> the three file names mentioned above for the files that you turn in.</li>
+
+<li>The Python file that you turn in must be able to be loaded (using the Run Module menu item) in the Python playground without any errors.</li>
+
+<li>Each Python function must have <i>exactly</i> the name used below, and note that names are case-sensitive (lowercase letters are not considered the same as uppercase letters).</li>
+
+<li>Each of your Picobot code files must be able to be copied <i>in its entirety</i> into the Picobot Rules window and executed without any errors.</li>
+
+</ul>
+
+<b>Testing is critical.</b> You should test your Python code using <tt>assert</tt> statements, as shown in class.  To facilitate this, I've provided a file <tt>hw1test.py</tt> containing one test function per function that you have to submit.  Each test function contains one test, but you should add several more to make sure that your functions work as intended.  <i>Running these test functions will also go a long way toward making sure that you have followed the rules above --- any issues with wrong names will be discovered, for example.</i>
+
+<h3>Recall the CS30 Academic Honesty Policy!  You must list whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.  You can list that as a comment at the top of the <tt>hw1.py</tt> file.</h3>
+
+<p>
+Now on to the assignment!
+
+<h3>Problem #1:  Python Functions</h3>
+
+In this problem you will implement several Python functions. I've provided the <tt>hw1.py</tt> file to get you started, but there isn't much there!  <i>Do not use any language features of Python that have not been covered in class.  Do not use any Python libraries other than the <tt>math</tt> library.</i>
+
+<ol type="a">
+
+<li>Implement a function <tt>totalSeconds</tt> that takes 3 integers, in order representing a number of hours, minutes, and seconds.  The function should return the total number of seconds that this represents.  For example, <tt>totalSeconds(1,2,3)</tt> evaluates to <tt>3723</tt>.  Currently the <tt>hw1.py</tt> file contains an implementation of this function but it just returns <tt>0</tt> -- you should edit it to do the right thing.<p></li>
+
+<li>Two integers are <a href="https://en.wikipedia.org/wiki/Coprime_integers">relatively prime</a> if they have no common factors other than 1.  Implement a function <tt>relativelyPrime</tt> that takes two integers and returns a boolean value indicating if the two numbers are relatively prime.  For example, <tt>relativelyPrime(14, 15)</tt> returns <tt>True</tt>.  <i>Hint: Find a function in Python's <a href="https://docs.python.org/3/library/math.html">math</a> library that you can call to do most of the work.</i><p></p></li>
+
+<li>Implement a function <tt>distanceFromSquare</tt> that takes a positive integer as an argument and returns its distance from the nearest integer (either above or below it) that is a square.  For example, <tt>distanceFromSquare(13)</tt> returns <tt>3</tt> since 13 is 3 away from 16, which is a square.  <i>Hint: Again Python's <tt>math</tt> library will be useful.  Also recall the built-in <tt>min</tt> function, which returns the minimum of its argument numbers.</i><p></p></li>
+
+<li>Implement a function <tt>palindrome4</tt> that takes a string containing exactly four characters and returns a boolean value indicating whether the string is a palindrome (i.e., it is the same forwards as backwards).  For example, <tt>palindrome4('abba')</tt> returns <tt>True</tt>.  Your function should also work on lists that have length 4; for example <tt>palindrome4([1, 2, 2, 1])</tt> returns <tt>True</tt>.<p></p></li>
+
+<li>Implement a function <tt>palindrome8</tt> that takes a string containing exactly eight characters and returns a boolean value indicating whether the string is a palindrome.  <b>Your implementation is not allowed to test characters for equality with one another; instead call your <tt>palindrome4</tt> function (multiple times!) to solve this problem.</b><p></p></li>
+
+<li><i>Optional challenge problem (just for you, no need to turn it in)</i>:  Implement a function <tt>fromTotalSeconds</tt> that is in the inverse of the <tt>totalSeconds</tt> function above.  Specifically it takes an integer argument representing a number of seconds and returns a list containing the corresponding number of hours, minutes, and seconds.  For example, <tt>fromTotalSeconds(3723)</tt> evaluates to <tt>[1, 2, 3]</tt>.  <i>Hint: The modulus operator <tt>%</tt> will be useful, and so will the integer division operator <tt>//</tt>, which performs division but only returns the integer part of the result.</i>
+
+</ol>
+
+<h3>Problem #2:  Picobot</h3>
+
+The Picobot playground is <a href="https://www.cs.hmc.edu/picobot/">here</a>.
+
+<ol type="a">
+<li> Write a Picobot program (i.e., a set of rules) that will cause the robot to traverse every cell in a rectangular world.  Your program should work regardless of where the robot starts from in the world, so make sure to test your code with the robot in many different starting places -- you can use the <i>Teleport Robot</i> buttons at the bottom to move the robot to wherever you want it to start.  <i>Advice: Write your rules incrementally.  That is, write a few rules.  See what they do.  Then add new rules or modify the rules to try to make them a bit better.  Continue in this way until you have a full solution.</i>  
+
+<p>Copy and paste your rules to a text file named <tt>pico1.txt</tt>.  You can use IDLE to create and save this file, or you can use any other <a href="https://en.wikipedia.org/wiki/Text_editor">text editor</a> that you are comfortable with (<i>note that Microsoft Word is not a text editor, because it does not save its files in plain-text format</i>).  <b>Make sure that the file contains only your rules</b>;  comments (lines starting with <tt>#</tt>) are ok, but nothing else should be there.  In particular, copying and pasting the entire contents of this file back into the Picobot Rules window should result in a valid solution to the problem.  <b>Try doing that and make sure it works!</b><p></li>
+
+<li>Press the <tt>&#45;&#45;&gt;</tt> button to the right of the word MAP on the Picobot webpage two times, and you will see a diamond-like world.  Write a Picobot program that will cause the robot to traverse every cell in this world, from any starting point.
+Copy and paste your rules to a text file named <tt>pico2.txt</tt>.  Again, make sure that copying and pasting the entire contents of this file back into the Picobot Rules window results in a valid solution to the problem.<p></li>
+
+<li><i>Optional challenge problem (just for you, no need to turn it in)</i>: Try to solve the first Picobot problem above in as few rules as possible.  How many rules do you need?  Same question for the second Picobot problem above.</li>
+</ol>
+
+
+</body></html>

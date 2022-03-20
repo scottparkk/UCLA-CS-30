@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+lang="en"><head><title>Homework 6</title>
+</head>
+
+
+<body>
+
+<h1>Homework 6</h1>
+
+<h2>Due Thursday, December 2, at 11:30pm</h2>
+
+<h3>Turn in your homework via the CCLE web page for our course as an updated version of the <tt>hw6.py</tt> file that I have provided.   <b>Make sure to use exactly this file name; otherwise you will get a 0 on the homework!</b>
+
+<h3>Make sure that the file can be executed without any syntax or other errors into the Python interpreter; otherwise you will get a 0 on the homework!</h3>
+
+<h3>Recall the CS30 Academic Honesty Policy!  You must list whom you
+discussed the assignment with at the top of your assignment, and also what
+other resources you used.  You can list that as a comment at the top of the <tt>hw6.py</tt> file.</h3>
+
+<h3>The Assignment</h3>
+
+This assignment will give you practice with loops. <b>Here are the rules you must follow:</b>
+
+<ol>
+	<li>You may not use either recursion or functions that take
+		other functions as arguments (such as <tt>map</tt> and <tt>filter</tt>).  Instead, <b>your functions should only use loops.</b><p></p></li>
+
+	<li>Do not use any function from Python libraries.  Do not use any built-in functions of Python that have not been discussed in lecture.  Do not use any language features of Python that have not been discussed in lecture.  If in doubt, ask!<p></p></li>
+
+	<li>Test your code as usual, with the functions in <tt>hw6test.py</tt>.<p></li>
+</ol>
+
+The file <tt>hw6.py</tt> is empty.  You should write your functions there.  <b>Make sure to use exactly the same function names as specified below, or you will get no credit.</b>
+
+<ol type="a">
+
+<li>Implement a function <tt>halveEvens</tt>, which takes a list <tt>l</tt> of integers and returns a list that is identical to <tt>l</tt> except that all odd integers have been removed and all even integers have been halved.  For example, <tt>halveEvens([10,21,32,42,55])</tt> returns <tt>[5, 16, 21]</tt>.<p></p></li>
+
+<li>Implement a function <tt>splitEveryOther</tt> that takes a list <tt>l</tt> and returns a list of two lists that together contain the elements of the original list in an "every other" fashion.  For example, <tt>splitEveryOther([1, 4, 23, 3, 8])</tt> returns <tt>[[1, 23, 8], [4, 3]]</tt>. <b>Important Rule: You are not allowed to use the slicing operation to create new lists.  Instead, just loop over the given list.</b><p></p></li>
+
+<li>Implement a function <tt>isSorted</tt>, which takes a list of integers and returns <tt>True</tt> if the list is in sorted order from least to greatest and <tt>False</tt> otherwise.  You implemented this using recursion in a prior homework, but now you will implement it using loops.  Duplicate elements are allowed.  For example, <tt>isSorted([1, 3, 3, 7])</tt> returns <tt>True</tt> while <tt>isSorted([1, 3, 7, 3])</tt> returns <tt>False</tt>.<p></p></li>
+
+<li>In mathematics, the <i>dot product</i> of two vectors of numbers &lt;a1,a2,...,aN&gt; and &lt;b1,b2,...,bN&gt; is defined as a1*b1 + a2*b2 + ... + aN*bN. Implement a function <tt>dotProduct</tt> that computes the dot product of two vectors, where Python lists are used to represent the vectors. For example, <tt>dotProduct([1,2,3], [4,5,6])</tt> returns <tt>32</tt> (since 1*4 + 2*5 + 3*6 = 32). You may assume that the two argument lists have the same length.<p></li>
+
+
+<li>Re-implement the <tt>negate</tt> function from Homework 5, which produces the color negative of an image.  But now instead of a map within a map, you'll need to use a loop within a loop!  You can assume the same representation of images that we used in that homework: a list of lists of dictionaries.<p></li>
+
+
+<li>Implement a function <tt>toDigitList</tt> that takes a positive integer <tt>n</tt> and returns a list of its digits, in order.  For example, <tt>toDigitList(403)</tt> returns <tt>[4, 0, 3]</tt>.  <b>Important Rule: You may not convert any numbers to strings, or use any string operations of Python.</b>  <i>Hint: Iteratively determine the digits from right to left in the number.  The modulo operator <tt>%</tt> and integer division  operator <tt>//</tt> will come in handy.</i><p></li>
+
+<li>Consider the process of taking a positive integer <tt>n</tt>, summing its digits, then
+    summing the digits of the number derived from it, etc., until the remaining
+    number has only one digit. The digit obtained is called the <i>digital root</i> of
+    <tt>n</tt>, and the number of sums required to obtain a single digit from a number <tt>n</tt> is
+    called the <i>additive persistence</i> of <tt>n</tt>.
+
+    <p>For example, 9879 has a digital root of 6 since 9+8+7+9 = 33 and 3+3 = 6.  Since
+    two sets of digits were summed in this process, the additive persistence of 9879 is 2.
+
+    <p>Implement a function <tt>digitalRootAndPersistence</tt> that takes a positive integer <tt>n</tt> and returns both its digital
+    root and its additive persistence, represented as a dictionary with keys <tt>"root"</tt> and <tt>"persistence"</tt>.  For example, <tt>digitalRootAndPersistence(9879)</tt> returns
+    <tt>{"root": 6, "persistence": 2}</tt>.  <i>Note: You may use Python's built-in <tt>sum</tt> function, which sums the elements of
+    a list of numbers, and the <tt>toDigitList</tt> function that you defined above will also be useful.</i></li>
+</ol>
+
+</body></html>
